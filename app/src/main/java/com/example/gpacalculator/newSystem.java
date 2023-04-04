@@ -14,7 +14,7 @@ import android.widget.Toast;
 public class newSystem extends AppCompatActivity {
 
     private Button before2023GPA, findNewGPA, clearAllNew;
-    private ImageButton toAboutPage;
+    private ImageButton toAboutPage, settingPage;
     private EditText Nch1, Nch2, Nch3, Nch4, Nch5, Nch6, Nm1, Nm2, Nm3, Nm4, Nm5, Nm6;
     private TextView finalNewGPA;
     @Override
@@ -90,6 +90,20 @@ public class newSystem extends AppCompatActivity {
                     finalNewGPA.setText("");
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), e.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        settingPage = (ImageButton) findViewById(R.id.settings);
+        settingPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    startActivity(new Intent(newSystem.this, SettingsActivity.class));
+                    finish();
+                }catch (Exception e)
+                {
+                    Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -16,7 +16,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private Button after2023GPA, finOldGpa, clearAllOld;
-    private ImageButton toAboutPage;
+    private ImageButton toAboutPage, settingPage;
     private EditText ch1, ch2, ch3, ch4, ch5, ch6, m1, m2, m3, m4, m5, m6;
     private TextView finalGPAView;
 
@@ -114,6 +114,21 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        settingPage = (ImageButton) findViewById(R.id.settings);
+        settingPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                    finish();
+                }catch (Exception e)
+                {
+                    Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 
     private double goToCalculation() {
