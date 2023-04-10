@@ -12,14 +12,13 @@ import android.widget.Toast;
 
 public class aboutMe extends AppCompatActivity {
 
-    private Button backFromAbout;
-    private ImageButton toLinkedIN, toFacebook, toInstagram, toGithub, toTwitter;
+    private ImageButton toLinkedIN, toFacebook, toInstagram, toGithub, toTwitter, backFromAbout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aboutme);
         /// to Main Page
-        backFromAbout = (Button) findViewById(R.id.backFromAbout);
+        backFromAbout = (ImageButton) findViewById(R.id.backFromAbout);
         backFromAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,5 +108,15 @@ public class aboutMe extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void onBackPressed() {
+        try {
+            startActivity(new Intent(aboutMe.this, MainActivity.class));
+            finish();
+        }catch (Exception e)
+        {
+            Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 }

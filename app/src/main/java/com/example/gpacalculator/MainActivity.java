@@ -1,7 +1,9 @@
 package com.example.gpacalculator;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,6 +14,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,35 +57,35 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         finOldGpa = (Button) findViewById(R.id.findOldGPA);
         finOldGpa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 try {
-                    //System.out.println(goToCalculation());
+                    System.out.println(goToCalculation());
                     finalGPAView = (TextView) findViewById(R.id.FinalGPAView);
-
+                    DecimalFormat decimalFormat = new DecimalFormat("#.##");
+                    /// goto calculation function
                     double value = goToCalculation();
-                    String value1 = String.valueOf(value);
+                    String value1 = String.valueOf(decimalFormat.format(value));
 
-                    if (value >=3.50)
-                    {
+                    if (value >= 3.50) {
                         finalGPAView.setTextColor(Color.parseColor("#4CAF50"));
                     }
-                    if (value <=3.40 && value >=2.80)
-                    {
+                    if (value <= 3.40 && value >= 2.80) {
                         finalGPAView.setTextColor(Color.parseColor("#CDDC39"));
                     }
-                    if(value >2.00 && value <=2.80){
+                    if (value > 2.00 && value <= 2.80) {
                         finalGPAView.setTextColor(Color.parseColor("#792522"));
                     }
-                    if (value <2.00)
-                    {
+                    if (value < 2.00) {
                         finalGPAView.setTextColor(Color.parseColor("#F10B02"));
 
                     }
                     finalGPAView.setText(value1 + " GPA");
+
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), e.getMessage(),Toast.LENGTH_SHORT).show();
                 }
@@ -638,6 +642,21 @@ public class MainActivity extends AppCompatActivity {
 
         return (gpa1*credits1+gpa2*credits2+gpa3*credits3+gpa4*credits4+gpa5*credits5+gpa6*credits6)/(credits1+credits2+credits3+credits4+credits5+credits6);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("Are you sure you want to exit?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // User clicked "Yes" button, so exit the application
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 
 }

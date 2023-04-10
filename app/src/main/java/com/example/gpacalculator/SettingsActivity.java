@@ -11,6 +11,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
 
+import java.util.Set;
+
 public class SettingsActivity extends AppCompatActivity {
 
     private ImageButton themeSetting;
@@ -41,5 +43,15 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void onBackPressed() {
+        try {
+            startActivity(new Intent(SettingsActivity.this, MainActivity.class));
+            finish();
+        }catch (Exception e)
+        {
+            Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 }

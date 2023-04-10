@@ -1,8 +1,11 @@
 package com.example.gpacalculator;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +13,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.DecimalFormat;
 
 public class newSystem extends AppCompatActivity {
 
@@ -54,10 +59,27 @@ public class newSystem extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    System.out.println(goToNewCalculation());
+//                    System.out.println(goToNewCalculation());
+                    DecimalFormat decimalFormat = new DecimalFormat("#.##");
                     finalNewGPA = (TextView) findViewById(R.id.FinalGPAViewNew);
                     double value = goToNewCalculation();
-                    String value1 = String.valueOf(value);
+                    String value1 = String.valueOf(decimalFormat.format(value));
+                    if (value >=3.50)
+                    {
+                        finalNewGPA.setTextColor(Color.parseColor("#4CAF50"));
+                    }
+                    if (value <=3.40 && value >=2.80)
+                    {
+                        finalNewGPA.setTextColor(Color.parseColor("#CDDC39"));
+                    }
+                    if(value >2.00 && value <=2.80){
+                        finalNewGPA.setTextColor(Color.parseColor("#792522"));
+                    }
+                    if (value <2.00)
+                    {
+                        finalNewGPA.setTextColor(Color.parseColor("#F10B02"));
+
+                    }
                     finalNewGPA.setText(value1 + " GPA");
 //                System.out.println(value1);
                 } catch (Exception e) {
@@ -813,5 +835,17 @@ public class newSystem extends AppCompatActivity {
         return (Ngpa1*Ncredits1+Ngpa2*Ncredits2+Ngpa3*Ncredits3+Ngpa4*Ncredits4+Ngpa5*Ncredits5+Ngpa6*Ncredits6)/(Ncredits1+Ncredits2+Ncredits3+Ncredits4+Ncredits5+Ncredits6);
 
     }
+
+    @Override
+    public void onBackPressed() {
+        try {
+            startActivity(new Intent(newSystem.this, MainActivity.class));
+            finish();
+        }catch (Exception e)
+        {
+            Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
 }
